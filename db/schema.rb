@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 2021_09_06_144308) do
     t.string "code", null: false
     t.decimal "price", null: false
     t.integer "count_for_discount"
-    t.decimal "discount_percent"
+    t.decimal "discount"
+    t.boolean "apply_discount", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_products_on_code", unique: true
