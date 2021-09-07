@@ -1,12 +1,12 @@
 = turbo_frame_tag :basket
-  - @basket_products&.each do |product|
+  - basket_products_counts.each do |product, count|
     div
       = product.name
-      = " x#{basket_products_ids.tally[product.id]}"
+      = " x#{count}"
 
   h4
     = 'Amount '
-    = BasketPriceCalculator.new(@basket_products).sum.round(2)
+    = BasketPriceCalculator.new(basket_products_counts).sum.round(2)
     = '€'
 
   div
