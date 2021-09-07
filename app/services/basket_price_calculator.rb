@@ -1,12 +1,13 @@
 class BasketPriceCalculator
-  def initialize(products_ids)
-    @products_ids = products_ids
+  def initialize(basket_products)
+    @basket_products = basket_products
   end
 
   def sum
     result = 0
+    return result if @basket_products.blank?
 
-    products_by_ids(@products_ids).each do |_id, products|
+    @basket_products.group_by(&:id).each do |_id, products|
       product = products.first
 
       if product.apply_discount
@@ -19,12 +20,5 @@ class BasketPriceCalculator
     end
 
     result
-  end
-
-  private
-
-  def products_by_ids(products_ids)
-    products = Product.where(id: products_ids).index_by(&:id)
-    products_ids.map { |id| products[id] }.group_by(&:id)
   end
 end

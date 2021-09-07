@@ -1,31 +1,31 @@
 class ProductsController < ApplicationController
-  before_action :load_cart_products, only: %i[index]
-  helper_method :cart_products_ids
+  before_action :load_basket_products, only: %i[index]
+  helper_method :basket_products_ids
 
   def index
     @all_products = Product.all
   end
 
-  def add_to_cart
-    session[:cart_products_ids] ||= []
-    session[:cart_products_ids] << params[:id]
-    load_cart_products
-    render turbo_stream: turbo_stream.replace(:cart, partial: 'products/cart')
+  def add_to_basket
+    session[:basket_products_ids] ||= []
+    session[:basket_products_ids] << params[:id]
+    load_basket_products
+    render turbo_stream: turbo_stream.replace(:basket, partial: 'products/basket')
   end
 
-  def clear_cart
-    session.delete(:cart_products_ids)
-    load_cart_products
-    render turbo_stream: turbo_stream.replace(:cart, partial: 'products/cart')
+  def clear_basket
+    session.delete(:basket_products_ids)
+    load_basket_products
+    render turbo_stream: turbo_stream.replace(:basket, partial: 'products/basket')
   end
 
   private
 
-  def load_cart_products
-    @cart_products = Product.where(id: session[:cart_products_ids])
+  def load_basket_products
+    @basket_products = Product.where(id: session[:basket_products_ids])
   end
 
-  def cart_products_ids
-    @cart_products_ids ||= (session[:cart_products_ids] || []).map(&:to_i)
+  def basket_products_ids
+    @basket_products_ids ||= (session[:basket_products_ids] || []).map(&:to_i)
   end
 end

@@ -1,0 +1,13 @@
+= turbo_frame_tag :basket
+  - @basket_products&.each do |product|
+    div
+      = product.name
+      = " x#{basket_products_ids.tally[product.id]}"
+
+  h4
+    = 'Amount '
+    = BasketPriceCalculator.new(@basket_products).sum.round(2)
+    = '€'
+
+  div
+    = link_to 'Clear basket', clear_basket_products_path, method: :delete
