@@ -27,3 +27,7 @@ First, set up and run the app. Then
 yarn run playwright test
 yarn run playwright show-trace trace.zip # to see how it was running
 ```
+
+## TODO
+
+* Configure E2E test environment with docker-compose
