@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  after_action :broadcast_change, only: %i[add_to_basket clear_basket]
   helper_method :basket_products_counts
 
   def index
@@ -8,15 +9,19 @@ class ProductsController < ApplicationController
   def add_to_basket
     session[:basket_products_ids] ||= []
     session[:basket_products_ids] << params[:id]
-    render turbo_stream: turbo_stream.replace(:basket, partial: 'products/basket')
   end
 
   def clear_basket
     session.delete(:basket_products_ids)
-    render turbo_stream: turbo_stream.replace(:basket, partial: 'products/basket')
   end
 
   private
+
+  def broadcast_change
+    Turbo::StreamsChannel.broadcast_replace_to session[:session_id], :basket,
+      target: :basket, partial: 'products/basket',
+      locals: { basket_products_counts: basket_products_counts }
+  end
 
   def basket_products_counts
     @basket_products_counts ||= begin

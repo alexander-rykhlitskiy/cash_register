@@ -5,4 +5,5 @@
 
   div
     h3 Basket
+    = turbo_stream_from session[:session_id], :basket
     = render 'basket'
