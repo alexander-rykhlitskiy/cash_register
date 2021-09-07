@@ -1,7 +1,8 @@
-div
-  h3 Basket
-  = render 'basket'
+.cash-register
+  div
+    h3 Available products
+    table = render @all_products
 
-div
-  h3 Available products
-  table = render @all_products
+  div
+    h3 Basket
+    = render 'basket'

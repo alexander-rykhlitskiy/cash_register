@@ -15,7 +15,7 @@
  */
 
 #content {
-  padding-left: 20%;
+  padding-left: 2rem;
 }
 
 table {
@@ -24,6 +24,15 @@ table {
 }
 
 td {
-  padding: 10px;
+  padding: 1rem;
   border: 1px solid lightgrey;
+}
+
+.cash-register {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.cash-register > div {
+  padding: 2rem;
 }
