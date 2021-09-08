@@ -14,8 +14,15 @@
  *= require_self
  */
 
-#content {
-  padding-left: 2rem;
+body {
+  margin: auto;
+  max-width: 40em;
+}
+
+body > div {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 1em;
 }
 
 table {
@@ -26,13 +33,4 @@ table {
 td {
   padding: 1rem;
   border: 1px solid lightgrey;
-}
-
-.cash-register {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.cash-register > div {
-  padding: 2rem;
 }

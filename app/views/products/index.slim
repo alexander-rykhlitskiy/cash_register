@@ -1,9 +1,8 @@
-.cash-register
-  div
-    h3 Available products
-    table = render @all_products
+div
+  h3 Available products
+  table = render @all_products
 
-  div
-    h3 Basket
-    = turbo_stream_from session[:session_id], :basket
-    = render 'basket'
+div
+  h3 Basket
+  = turbo_stream_from session[:session_id], :basket
+  = render 'basket'
